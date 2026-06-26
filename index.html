@@ -3,113 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>مساحتنا الخاصة 💖</title>
     <style>
         body, html { 
             margin: 0; padding: 0; width: 100%; min-height: 100%; 
             font-family: 'Segoe UI', Tahoma, Arial, sans-serif; 
-            color: #333; overflow-x: hidden;
-            background: linear-gradient(-45deg, #ffcce0, #ffe6f0, #ffb3d1, #ffd6e8); 
-            background-size: 400% 400%; 
-            animation: gradientBG 15s ease infinite; 
+            color: #555; overflow-x: hidden;
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffcce0 100%);
         }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        /* قلوب متحركة في الخلفية */
+        .floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .heart { position: absolute; font-size: 20px; color: rgba(255, 105, 180, 0.3); animation: floatUp 10s linear infinite; bottom: -20px; }
+        @keyframes floatUp { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; } 
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
+        }
+
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; position: relative; z-index: 1; }
         .screen { display: none; opacity: 0; transition: opacity 0.6s ease; width: 100%; }
         .screen.active { display: flex; opacity: 1; }
         
-        /* الصناديق بتأثير زجاجي حديث */
-        .glass-box { 
-            background: rgba(255, 255, 255, 0.7); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 20px; padding: 40px; 
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2); 
-            text-align: center; max-width: 400px; width: 90%; 
+        /* الصناديق الناعمة (غير الرسمية) */
+        .soft-box { 
+            background: #ffffff; 
+            border-radius: 30px; padding: 40px 30px; 
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); 
+            text-align: center; max-width: 420px; width: 90%; 
         }
         
-        h2 { color: #ff1493; margin-bottom: 20px; font-size: 26px; }
+        .lock-icon { font-size: 65px; margin-bottom: 10px; animation: bounce 2s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        h1 { color: #ff1493; font-size: 28px; margin-bottom: 15px; }
+        h2 { color: #ff4d85; margin-bottom: 5px; font-size: 26px; }
+        
         input[type="password"] { 
-            padding: 15px; margin: 15px 0; border: 2px solid #ffb6c1; 
-            border-radius: 10px; text-align: center; font-size: 18px; 
-            width: 80%; outline: none; background: rgba(255,255,255,0.9);
+            padding: 16px; margin: 20px 0; border: 2px solid #ffb6c1; 
+            border-radius: 15px; text-align: center; font-size: 18px; 
+            width: 85%; outline: none; color: #333; transition: 0.3s;
         }
-        button { 
-            background-color: #ff1493; color: white; border: none; 
-            padding: 12px 30px; border-radius: 25px; font-size: 18px; 
-            cursor: pointer; font-weight: bold; transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
-        }
-        button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4); }
+        input[type="password"]:focus { border-color: #ff1493; box-shadow: 0 0 10px rgba(255,20,147,0.2); }
         
-        /* إشعار الخطأ */
+        button { 
+            background: linear-gradient(45deg, #ff4d85, #ff1493); 
+            color: white; border: none; padding: 15px 35px; 
+            border-radius: 30px; font-size: 18px; cursor: pointer; 
+            font-weight: bold; transition: 0.3s; box-shadow: 0 8px 20px rgba(255, 20, 147, 0.3);
+            width: 85%;
+        }
+        button:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4); }
+        
         #toast { 
             position: fixed; top: -100px; left: 50%; transform: translateX(-50%); 
             background-color: #fff; border-right: 5px solid #ff4d6d; 
-            padding: 15px 25px; border-radius: 8px; font-weight: bold; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            padding: 15px 25px; border-radius: 12px; font-weight: bold; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
             transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             z-index: 1000; color: #ff4d6d; 
         }
         #toast.show { top: 30px; }
 
         /* العداد الزمني */
-        #counter-container { margin: 20px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; direction: rtl; }
+        #counter-container { margin: 20px 0; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; direction: rtl; }
         .time-box { 
-            background: rgba(255, 20, 147, 0.1); border-radius: 10px; 
-            padding: 10px 15px; min-width: 60px; text-align: center; 
-            color: #ff1493; font-weight: bold; font-size: 20px; 
-            border: 1px solid rgba(255, 20, 147, 0.2);
+            background: #fff0f5; border-radius: 12px; 
+            padding: 12px 15px; min-width: 65px; text-align: center; 
+            color: #ff1493; font-weight: bold; font-size: 22px; 
+            box-shadow: 0 4px 10px rgba(255,182,193,0.3);
         }
-        .time-box span { display: block; font-size: 12px; color: #666; margin-top: 5px; }
+        .time-box span { display: block; font-size: 13px; color: #888; margin-top: 4px; font-weight: normal; }
 
-        /* النصوص */
-        .typewriter-text { font-size: 18px; line-height: 1.8; color: #444; min-height: 120px; text-align: justify; }
+        .typewriter-text { font-size: 18px; line-height: 1.9; color: #555; min-height: 120px; text-align: center; }
         
-        /* البطاقات والصور (إصلاح الأبعاد) */
-        .cards-grid { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 40px 0; width: 100%; }
+        /* البطاقات والصور */
+        .cards-grid { display: flex; flex-direction: column; align-items: center; gap: 25px; padding: 40px 0; width: 100%; z-index: 1; position: relative; }
         .card { 
-            background: white; border-radius: 20px; padding: 15px; 
-            width: 90%; max-width: 400px; cursor: pointer; transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;
+            background: white; border-radius: 25px; padding: 15px; 
+            width: 90%; max-width: 420px; cursor: pointer; transition: 0.4s; 
+            box-shadow: 0 10px 25px rgba(255,182,193,0.3); text-align: center;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255,105,180,0.2); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,105,180,0.4); }
         .card img { 
-            width: 100%; height: 280px; object-fit: cover; /* هذا يمنع تشوه الصورة */
-            border-radius: 15px; 
+            width: 100%; height: 320px; 
+            object-fit: cover; /* يمنع تشوه الصورة */
+            image-rendering: high-quality; /* تحسين جودة العرض */
+            border-radius: 20px; margin-bottom: 10px;
         }
-        .card p { font-weight: bold; color: #ff1493; margin-top: 15px; font-size: 16px; }
+        .card p { font-weight: bold; color: #ff4d85; margin: 10px 0 5px 0; font-size: 18px; }
 
-        /* زر الرسالة الختامية */
-        .final-btn { background: #fff; color: #ff1493; border: 2px solid #ff1493; margin-top: 20px; }
-        .final-btn:hover { background: #ff1493; color: #fff; }
-
-        /* العرض المكبر للصور */
         .lightbox { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); display: none; justify-content: center; 
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: none; justify-content: center; 
             align-items: center; z-index: 2000; opacity: 0; transition: 0.3s; 
         }
-        .lightbox img { max-width: 95%; max-height: 90%; border-radius: 10px; object-fit: contain; }
+        .lightbox img { max-width: 95%; max-height: 90%; border-radius: 15px; object-fit: contain; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
+    <div class="floating-hearts" id="hearts-container"></div>
     <div id="toast">⚠️ عذراً، كلمة المرور غير صحيحة!</div>
 
-    <!-- شاشة تسجيل الدخول -->
     <div id="loginScreen" class="container screen active">
-        <div class="glass-box">
+        <div class="soft-box">
+            <div class="lock-icon">🔒</div>
             <h2>تسجيل الدخول</h2>
             <input type="password" id="passInput" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter') checkPass()">
             <br>
-            <button onclick="checkPass()">دخول</button>
+            <button onclick="checkPass()">دخول 💕</button>
         </div>
     </div>
 
-    <!-- الشاشة الافتتاحية -->
     <div id="introScreen" class="container screen">
-        <div class="glass-box" style="max-width: 600px;">
+        <div class="soft-box" style="max-width: 600px;">
+            <h1>إلى من تشرق بها أيامي.. 💖</h1>
             <div id="counter-container">
                 <div class="time-box" id="d-box">0<span>يوم</span></div>
                 <div class="time-box" id="h-box">0<span>ساعة</span></div>
@@ -117,11 +124,10 @@
                 <div class="time-box" id="s-box">0<span>ثانية</span></div>
             </div>
             <p id="introText" class="typewriter-text"></p>
-            <button id="nextBtn" style="margin-top: 20px; display: none;" onclick="switchScreen('introScreen', 'cardsScreen')">المضي قدماً ✨</button>
+            <button id="nextBtn" style="margin-top: 20px; display: none;" onclick="switchScreen('introScreen', 'cardsScreen')">تعالي نشوف الذكريات ✨</button>
         </div>
     </div>
 
-    <!-- شاشة الصور -->
     <div id="cardsScreen" class="screen">
         <div class="cards-grid">
             <div class="card" onclick="openLightbox('https://i.postimg.cc/p9Ynn2qJ/1.jpg')"><img src="https://i.postimg.cc/p9Ynn2qJ/1.jpg" alt="Memory 1"><p>من هنا بدأت حكايتنا 💖</p></div>
@@ -130,14 +136,13 @@
             <div class="card" onclick="openLightbox('https://i.postimg.cc/wyqRXSGN/4.jpg')"><img src="https://i.postimg.cc/wyqRXSGN/4.jpg" alt="Memory 4"><p>وعودنا اللي مستحيل تنكسر ❤️</p></div>
             <div class="card" onclick="openLightbox('https://i.postimg.cc/xJ6Jt6rc/5.jpg')"><img src="https://i.postimg.cc/xJ6Jt6rc/5.jpg" alt="Memory 5"><p>ضحكاتنا اللي تحلي أيامي 😂</p></div>
             
-            <button class="final-btn" onclick="startFinalMessage()">رسالة إلى الغد 🤍</button>
+            <button style="width: 90%; max-width: 420px; margin-top: 10px; background: #fff; color: #ff1493; border: 2px solid #ff1493;" onclick="startFinalMessage()">رسالة إلى الغد 🤍</button>
         </div>
     </div>
 
-    <!-- شاشة الرسالة الختامية -->
     <div id="finalScreen" class="container screen">
-        <div class="glass-box" style="max-width: 600px;">
-            <p id="finalText" class="typewriter-text" style="font-weight: bold; color: #ff1493;"></p>
+        <div class="soft-box" style="max-width: 600px;">
+            <p id="finalText" class="typewriter-text" style="font-weight: bold; color: #ff1493; min-height: auto;"></p>
         </div>
     </div>
 
@@ -146,7 +151,20 @@
     </div>
 
     <script>
-        const introMessage = "هناك لحظات تفصل حياتنا إلى ما قبل وما بعد، ووجودكِ يا ورد هو هذا الفاصل. لم يكن الأمر مجرد صدفة، بل كان أشبه بإيجاد المنطق في عالم فوضوي. كل ثانية نقضيها معاً ليست مجرد وقت يمر، بل هي إثبات لصدق ما بيننا. أنتِ نقطة الارتكاز التي يعتدل بها توازني، والواقع الذي أختاره كل يوم.";
+        // إنشاء القلوب المتحركة في الخلفية
+        const heartsContainer = document.getElementById('hearts-container');
+        for(let i=0; i<15; i++) {
+            let heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heartsContainer.appendChild(heart);
+        }
+
+        const introMessage = "هناك لحظات تفصل حياتنا إلى ما قبل وما بعد، ووجودكِ يا Ward هو هذا الفاصل. لم يكن الأمر مجرد صدفة، بل كان أشبه بإيجاد المنطق في عالم فوضوي. كل ثانية نقضيها معاً ليست مجرد وقت يمر، بل هي إثبات لصدق ما بيننا. أنتِ نقطة الارتكاز التي يعتدل بها توازني، والواقع الذي أختاره كل يوم.";
         const finalMessage = "بين كل هذه الصور والذكريات، هناك حقيقة واحدة ثابتة؛ أنا هنا لأجلكِ، في كل ثانية قادمة كما كنت في كل ثانية مضت. مهما تغيرت الأيام وتراكمت التفاصيل، مكانكِ في قلبي محمي بيقين لا يمسه شك. كوني بخير دائماً، لأنكِ بكل بساطة.. واقعي الأجمل. أحبكِ جداً ❤️";
 
         function switchScreen(hideId, showId) {
@@ -156,7 +174,7 @@
             setTimeout(() => {
                 hide.classList.remove("active");
                 show.classList.add("active");
-                window.scrollTo({ top: 0 });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 setTimeout(() => show.style.opacity = "1", 50);
             }, 500);
         }
@@ -179,7 +197,7 @@
             if (index === 0) document.getElementById(elementId).innerHTML = "";
             if (index < text.length) {
                 document.getElementById(elementId).innerHTML += text.charAt(index);
-                setTimeout(() => typeEffect(elementId, text, index + 1, callback), 45);
+                setTimeout(() => typeEffect(elementId, text, index + 1, callback), 40);
             } else if (callback) {
                 callback();
             }
