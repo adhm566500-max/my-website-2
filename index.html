@@ -20,9 +20,77 @@
         button { background-color: #ff1493; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; font-weight: bold; transition: transform 0.2s; }
         
         /* إشعار خطأ احترافي */
-        #toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background-color: #fff; border-right: 5px solid #ff4d6d; color: #333; padding: 15px 25px; border-radius: 8px; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; display: flex; align-items: center; }
-        #toast.show { top: 30px; }
-        .toast-icon { margin-left: 10px; color: #ff4d6d; font-size: 20px; }
+        <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Everything 💖</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; min-height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(-45deg, #ffcce0, #ffe6f0, #ffb3d1, #ffd6e8); animation: gradientBG 15s ease infinite; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        /* تصميم الإشعار الاحترافي الجديد */
+        #toast {
+            position: fixed;
+            top: -100px; /* مخفي في الأعلى */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 16px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.2);
+            border: 2px solid #ff4d6d;
+            color: #ff4d6d;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+        }
+        #toast.show { top: 30px; } /* يظهر في الأعلى */
+
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .screen { display: none; opacity: 0; transition: opacity 0.6s ease; width: 100%; }
+        .screen.active { display: flex; opacity: 1; }
+        .lock-box { background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; max-width: 300px; width: 100%; }
+        input { padding: 15px; border: 2px solid #eee; border-radius: 10px; width: 80%; text-align: center; margin-bottom: 15px; }
+        button { background: #ff1493; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="toast">
+        <span>❌</span>
+        كلمة المرور غير صحيحة، حاول مجدداً..
+    </div>
+
+    <div id="loginScreen" class="container screen active">
+        <div class="lock-box">
+            <h2>دخول</h2>
+            <input type="password" id="passInput" placeholder="أدخل الرمز" onkeydown="if(event.key==='Enter') checkPass()">
+            <br>
+            <button onclick="checkPass()">دخول 💕</button>
+        </div>
+    </div>
+
+    <script>
+        function checkPass() {
+            if (document.getElementById("passInput").value === "20081017") {
+                // الانتقال للخطوة التالية
+                alert("تم الدخول!");
+            } else {
+                // إظهار الإشعار الاحترافي
+                const t = document.getElementById("toast");
+                t.classList.add("show");
+                setTimeout(() => t.classList.remove("show"), 3000);
+                document.getElementById("passInput").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
 
         /* باقي التصميم */
         .intro-text { background: rgba(255,255,255,0.85); padding: 30px; border-radius: 15px; max-width: 500px; }
