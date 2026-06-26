@@ -9,41 +9,29 @@
             background: linear-gradient(-45deg, #ffcce0, #ffe6f0, #ffb3d1, #ffd6e8); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; text-align: center; box-sizing: border-box; }
-        
         .screen { display: none; opacity: 0; transition: opacity 0.6s ease; width: 100%; }
         .screen.active { display: flex; opacity: 1; }
-
-        /* Login */
         .lock-box { background-color: #fff; border-radius: 20px; padding: 40px 30px; box-shadow: 0 10px 30px rgba(255,105,180,0.3); max-width: 350px; width: 85%; }
         .lock-icon { font-size: 50px; margin-bottom: 10px; }
         h2 { color: #ff1493; margin-bottom: 5px; font-size: 24px; }
         .subtitle { color: #ff69b4; margin-bottom: 25px; font-weight: bold; }
         input[type="password"] { padding: 15px; margin: 15px 0; border: 2px solid #ffb6c1; border-radius: 10px; text-align: center; font-size: 18px; width: 80%; outline: none; }
         button { background-color: #ff1493; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(255,20,147,0.4); transition: transform 0.2s; }
-        
-        /* Toast */
         #toast { position: fixed; top: -50px; left: 50%; transform: translateX(-50%); background-color: #ff4d6d; color: white; padding: 12px 25px; border-radius: 30px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: top 0.4s ease; z-index: 1000; }
         #toast.show { top: 20px; }
-
-        /* Intro */
         .intro-text { background: rgba(255,255,255,0.85); padding: 30px; border-radius: 15px; max-width: 500px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         .intro-text h1 { color: #ff1493; font-size: 28px; }
         .intro-text p { font-size: 18px; line-height: 1.8; color: #555; min-height: 100px; }
         #counter { margin: 20px 0; padding: 15px; background: rgba(255, 20, 147, 0.1); border-radius: 12px; color: #ff1493; font-weight: bold; }
         #time { display: block; margin-top: 5px; font-size: 18px; color: #333; }
-
-        /* Cards */
         #cardsScreen { justify-content: flex-start; padding-top: 40px; padding-bottom: 40px; }
         .card { background: white; border-radius: 20px; padding: 15px; margin: 15px 0; box-shadow: 0 8px 25px rgba(255,105,180,0.2); width: 90%; max-width: 450px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
         .card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 30px rgba(255,105,180,0.35); }
         .card img { width: 100%; border-radius: 15px; margin-bottom: 15px; object-fit: cover; max-height: 400px; }
         .card p { font-size: 18px; color: #ff1493; font-weight: bold; margin: 0; }
-        
-        /* Lightbox */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
         .lightbox.active { display: flex; opacity: 1; }
         .lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-
         .floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20"><path fill="%23ff69b4" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>') repeat; opacity: 0.1; }
     </style>
 </head>
@@ -72,11 +60,11 @@
     </div>
 
     <div id="cardsScreen" class="container screen">
-        <div class="card" onclick="openLightbox('1.jpg')"><img src="1.jpg" alt="1"><p>من هنا بدأت قصتنا.. بضحكة واستغراب 💖</p></div>
-        <div class="card" onclick="openLightbox('2.jpg')"><img src="2.jpg" alt="2"><p>اللحظة اللي عرفت فيها إن الشعور متبادل والخوف راح 💕</p></div>
-        <div class="card" onclick="openLightbox('3.jpg')"><img src="3.jpg" alt="3"><p>أجمل أبيات انكتبت لي.. كلماتك سحرت قلبي ✨</p></div>
-        <div class="card" onclick="openLightbox('4.jpg')"><img src="4.jpg" alt="4"><p>726 مرة عبرنا فيها عن حبنا لبعض.. والقادم أكثر ❤️</p></div>
-        <div class="card" onclick="openLightbox('5.jpg')"><img src="5.jpg" alt="5"><p>آلاف الضحكات اللي بتخليني أحب الحياة معاكِ 😂</p></div>
+        <div class="card" onclick="openLightbox('https://i.postimg.cc/p9Ynn2qJ/1.jpg')"><img src="https://i.postimg.cc/p9Ynn2qJ/1.jpg" alt="1"><p>من هنا بدأت قصتنا.. بضحكة واستغراب 💖</p></div>
+        <div class="card" onclick="openLightbox('https://i.postimg.cc/mcNFFb8j/2.jpg')"><img src="https://i.postimg.cc/mcNFFb8j/2.jpg" alt="2"><p>اللحظة اللي عرفت فيها إن الشعور متبادل والخوف راح 💕</p></div>
+        <div class="card" onclick="openLightbox('https://i.postimg.cc/Vrf0q3hc/3.jpg')"><img src="https://i.postimg.cc/Vrf0q3hc/3.jpg" alt="3"><p>أجمل أبيات انكتبت لي.. كلماتك سحرت قلبي ✨</p></div>
+        <div class="card" onclick="openLightbox('https://i.postimg.cc/wyqRXSGN/4.jpg')"><img src="https://i.postimg.cc/wyqRXSGN/4.jpg" alt="4"><p>726 مرة عبرنا فيها عن حبنا لبعض.. والقادم أكثر ❤️</p></div>
+        <div class="card" onclick="openLightbox('https://i.postimg.cc/xJ6Jt6rc/5.jpg')"><img src="https://i.postimg.cc/xJ6Jt6rc/5.jpg" alt="5"><p>آلاف الضحكات اللي بتخليني أحب الحياة معاكِ 😂</p></div>
     </div>
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt="Zoomed"></div>
@@ -96,37 +84,19 @@
             }, 600);
         }
 
-        function showToast() {
-            const toast = document.getElementById("toast");
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
-        }
-
         function checkPass() {
             if (document.getElementById("passInput").value === "20081017") {
-                switchScreen("loginScreen", "introScreen", () => {
-                    startCounter();
-                    typeWriter();
-                });
+                switchScreen("loginScreen", "introScreen", () => { startCounter(); typeWriter(); });
             } else {
-                showToast();
+                const t = document.getElementById("toast");
+                t.classList.add("show");
+                setTimeout(() => t.classList.remove("show"), 3000);
                 document.getElementById("passInput").value = "";
             }
         }
 
-        function showCards() {
-            switchScreen("introScreen", "cardsScreen");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function typeWriter() {
-            if (i < message.length) {
-                document.getElementById("typewriterText").innerHTML += message.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-
+        function showCards() { switchScreen("introScreen", "cardsScreen"); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function typeWriter() { if (i < message.length) { document.getElementById("typewriterText").innerHTML += message.charAt(i); i++; setTimeout(typeWriter, 50); } }
         function startCounter() {
             setInterval(() => {
                 const diff = new Date() - new Date("2026-05-23T17:00:00");
@@ -137,19 +107,8 @@
                 document.getElementById("time").innerHTML = d+" يوم، "+h+" ساعة، "+m+" دقيقة، "+s+" ثانية";
             }, 1000);
         }
-
-        function openLightbox(src) {
-            document.getElementById('lightboxImg').src = src;
-            const lb = document.getElementById('lightbox');
-            lb.style.display = 'flex';
-            setTimeout(() => lb.style.opacity = '1', 10);
-        }
-
-        function closeLightbox() {
-            const lb = document.getElementById('lightbox');
-            lb.style.opacity = '0';
-            setTimeout(() => lb.style.display = 'none', 300);
-        }
+        function openLightbox(src) { document.getElementById('lightboxImg').src = src; const lb = document.getElementById('lightbox'); lb.style.display = 'flex'; setTimeout(() => lb.style.opacity = '1', 10); }
+        function closeLightbox() { const lb = document.getElementById('lightbox'); lb.style.opacity = '0'; setTimeout(() => lb.style.display = 'none', 300); }
     </script>
 </body>
 </html>
