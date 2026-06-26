@@ -5,28 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Everything 💖</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; min-height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; overflow-x: hidden; 
-            background: linear-gradient(-45deg, #ffcce0, #ffe6f0, #ffb3d1, #ffd6e8); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; text-align: center; box-sizing: border-box; }
-        .screen { display: none; opacity: 0; transition: opacity 0.6s ease; width: 100%; }
-        .screen.active { display: flex; opacity: 1; }
-        
-        /* تصميم صندوق الدخول */
-        .lock-box { background-color: #fff; border-radius: 20px; padding: 40px 30px; box-shadow: 0 10px 30px rgba(255,105,180,0.3); max-width: 350px; width: 85%; border: 1px solid #ffd1dc; }
-        .lock-icon { font-size: 50px; margin-bottom: 10px; }
-        h2 { color: #ff1493; margin-bottom: 5px; font-size: 24px; }
-        input[type="password"] { padding: 15px; margin: 15px 0; border: 2px solid #ffb6c1; border-radius: 10px; text-align: center; font-size: 18px; width: 80%; outline: none; }
-        button { background-color: #ff1493; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; font-weight: bold; transition: transform 0.2s; }
-        
-        /* إشعار خطأ احترافي */
-        <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Everything 💖</title>
-    <style>
         body, html { margin: 0; padding: 0; width: 100%; min-height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(-45deg, #ffcce0, #ffe6f0, #ffb3d1, #ffd6e8); animation: gradientBG 15s ease infinite; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
@@ -88,67 +66,6 @@
                 document.getElementById("passInput").value = "";
             }
         }
-    </script>
-</body>
-</html>
-
-        /* باقي التصميم */
-        .intro-text { background: rgba(255,255,255,0.85); padding: 30px; border-radius: 15px; max-width: 500px; }
-        #counter { margin: 20px 0; padding: 15px; background: rgba(255, 20, 147, 0.1); border-radius: 12px; color: #ff1493; font-weight: bold; }
-        .card { background: white; border-radius: 20px; padding: 15px; margin: 15px 0; width: 90%; max-width: 450px; transition: 0.3s; cursor: pointer; }
-        .card img { width: 100%; border-radius: 15px; }
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: 0.3s; }
-    </style>
-</head>
-<body>
-    <div id="toast"><span class="toast-icon">⚠️</span> عذراً، كلمة المرور غير صحيحة!</div>
-
-    <div id="loginScreen" class="container screen active">
-        <div class="lock-box">
-            <div class="lock-icon">🔒</div>
-            <h2>Unlock Memory</h2>
-            <input type="password" id="passInput" placeholder="أدخل الرمز" onkeydown="if(event.key==='Enter') checkPass()">
-            <br>
-            <button onclick="checkPass()">دخول 💕</button>
-        </div>
-    </div>
-
-    <div id="introScreen" class="container screen">
-        <div class="intro-text">
-            <h1>إلى W 💖</h1>
-            <div id="counter">نحن معاً منذ: <span id="time">...</span></div>
-            <p id="typewriterText"></p>
-            <button onclick="showCards()">عرض الذكريات ✨</button>
-        </div>
-    </div>
-
-    <div id="cardsScreen" class="container screen">
-        <div class="card" onclick="openLightbox('https://i.postimg.cc/p9Ynn2qJ/1.jpg')"><img src="https://i.postimg.cc/p9Ynn2qJ/1.jpg" alt="1"><p>بدايتنا 💖</p></div>
-        <div class="card" onclick="openLightbox('https://i.postimg.cc/mcNFFb8j/2.jpg')"><img src="https://i.postimg.cc/mcNFFb8j/2.jpg" alt="2"><p>شعور متبادل 💕</p></div>
-        <div class="card" onclick="openLightbox('https://i.postimg.cc/Vrf0q3hc/3.jpg')"><img src="https://i.postimg.cc/Vrf0q3hc/3.jpg" alt="3"><p>كلماتك 💖</p></div>
-        <div class="card" onclick="openLightbox('https://i.postimg.cc/wyqRXSGN/4.jpg')"><img src="https://i.postimg.cc/wyqRXSGN/4.jpg" alt="4"><p>وعودنا ❤️</p></div>
-    </div>
-
-    <div id="lightbox" class="lightbox" onclick="this.style.opacity='0'; setTimeout(()=>this.style.display='none',300)"><img id="lightboxImg" style="max-width:90%; max-height:80%; border-radius:10px;"></div>
-
-    <script>
-        const message = "وجودك في حياتي هو أجمل صدفة.. كل لحظة معك ذكرى لا تنسى.";
-        function checkPass() {
-            if (document.getElementById("passInput").value === "20081017") {
-                document.getElementById("loginScreen").classList.remove("active");
-                document.getElementById("introScreen").classList.add("active");
-                document.getElementById("introScreen").style.opacity = "1";
-                startCounter(); typeWriter();
-            } else {
-                const t = document.getElementById("toast");
-                t.classList.add("show");
-                setTimeout(() => t.classList.remove("show"), 3000);
-            }
-        }
-        function typeWriter(i=0) { if(i < message.length) { document.getElementById("typewriterText").innerHTML += message.charAt(i); setTimeout(()=>typeWriter(i+1), 50); } }
-        function startCounter() { setInterval(() => { const d = new Date() - new Date("2026-05-23T17:00:00"); document.getElementById("time").innerHTML = Math.floor(d/86400000) + " يوم"; }, 1000); }
-        function showCards() { document.getElementById("introScreen").classList.remove("active"); document.getElementById("cardsScreen").classList.add("active"); document.getElementById("cardsScreen").style.opacity="1"; }
-        function openLightbox(src) { const lb=document.getElementById('lightbox'); document.getElementById('lightboxImg').src=src; lb.style.display='flex'; setTimeout(()=>lb.style.opacity='1', 10); }
     </script>
 </body>
 </html>
